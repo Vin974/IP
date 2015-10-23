@@ -33,3 +33,9 @@ user=stagiaire ; id $user >> user.txt 2>&1
 sudo ifconfig eth0 | grep "inet adr:" | cut -d: -f2 | cut -d " " -f1;
 ip=$(sudo ifconfig eth0 | egrep -o 'inet adr:[^ ]+' | cut -d: -f2); echo $ip;
 sudo ifconfig eth0 | sed -nr 's/.*inet adr:([^ ]+).*/\1/; 2p';
+
+# Créer un fichier dans un dossier et un lien dur de ce fichier dans un sous dossier
+# Puis recherche de liens durs associés à un fichier
+touch source
+ln source /sousdossier/lien
+read -p "Fichier : " file ; find . -inum $(ls -i $file | cut -d" " -f1)
